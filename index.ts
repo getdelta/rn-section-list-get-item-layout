@@ -27,13 +27,17 @@ export interface Parameters<T> {
   listHeaderHeight?: number | (() => number)
 }
 
-export default <T = any>({
+type DefaultSectionT = {
+  [key: string]: any;
+};
+
+export default <T = any, SectionT = DefaultSectionT>({
   getItemHeight,
   getSeparatorHeight = () => 0,
   getSectionHeaderHeight = () => 0,
   getSectionFooterHeight = () => 0,
   listHeaderHeight = 0,
-}: Parameters<T>) => (data: SectionListData<T>[] | null, index: number) => {
+}: Parameters<T>) => (data: SectionListData<T, SectionT>[] | null, index: number) => {
   let i = 0
   let sectionIndex = 0
   let elementPointer: ListElement = { type: 'SECTION_HEADER' }
